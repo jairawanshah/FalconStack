@@ -1,4 +1,4 @@
-name: FalconStack Pipeline
+name: FalconStack Validation
 
 
 on:
@@ -6,22 +6,34 @@ on:
 
 
 jobs:
-  test:
+  validate:
     runs-on: ubuntu-latest
 
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
 
-      - name: Show Date
-        run: date
+      - name: Check Dockerfile
+        run: |
+          test -f Dockerfile
 
 
-      - name: Show Hostname
-        run: hostname
+      - name: Check Scripts Directory
+        run: |
+          test -d scripts
 
 
-      - name: Success Message
-        run: echo "FalconStack CI Pipeline Successful"
+      - name: Check Monitoring Directory
+        run: |
+          test -d monitoring
+
+
+      - name: Show Repository Structure
+        run: |
+          find .
+
+
+      - name: Validation Passed
+        run: echo "FalconStack validation successful"
