@@ -1,4 +1,4 @@
-name: FalconStack Validation
+name: FalconStack CI
 
 
 on:
@@ -6,34 +6,28 @@ on:
 
 
 jobs:
-  validate:
+  build:
     runs-on: ubuntu-latest
 
 
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
 
-      - name: Check Dockerfile
+      - name: Verify Dockerfile exists
+        run: test -f Dockerfile
+
+
+      - name: Build Docker Image
         run: |
-          test -f Dockerfile
+          docker build -t falconstack-ci
 
 
-      - name: Check Scripts Directory
+      - name: Show Built Images
         run: |
-          test -d scripts
+          docker images
 
 
-      - name: Check Monitoring Directory
-        run: |
-          test -d monitoring
-
-
-      - name: Show Repository Structure
-        run: |
-          find .
-
-
-      - name: Validation Passed
-        run: echo "FalconStack validation successful"
+      - name: Success
+        run: echo "Docker build successful"
