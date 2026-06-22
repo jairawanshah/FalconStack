@@ -1,0 +1,27 @@
+name: FalconStack Pipeline
+
+
+on:
+  push:
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+
+      - name: Show Date
+        run: date
+
+
+      - name: Show Hostname
+        run: hostname
+
+
+      - name: Success Message
+        run: echo "FalconStack CI Pipeline Successful"
