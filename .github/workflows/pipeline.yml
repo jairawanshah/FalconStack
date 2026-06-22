@@ -21,7 +21,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t falconstack-ci
+          docker build -t falconstack-ci .
 
 
       - name: Show Built Images
